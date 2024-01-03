@@ -1,7 +1,26 @@
 {% extends 'codeapp/base.html' %}
+{% load static %}
 
 {% block title %} Home Page {% endblock title %}
 
 {% block content %}
-This is the home Page
+Hello Developers, Welcome to DjangoCodes
+< />
+
+<div class="post_container">
+    <h1>Latest Posts</h1>
+    <a href="{% url 'index' %}">
+        <div class="post_content">
+            <div class="card text-white bg-secondary mb-3 rounded relative" style="width: 20rem;">
+                <img src="{% static 'codeapp/images/blog_layout.png' %}" class="card-img-top rounded absolute top-3"
+                    style=" width: 18rem; margin:0 auto;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
 {% endblock content %}
