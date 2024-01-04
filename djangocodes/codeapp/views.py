@@ -2,13 +2,31 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import *
+from .forms import *
 # Create your views here.
+
+# blogs
 def index(request):
     posts = BlogPost.objects.all()
     posts = BlogPost.objects.filter().order_by('-datetime')
     context={'posts':posts}
     return render(request,'codeapp/index.html',context)
+
+@login_required(login_url='/login')
+def add_blogs(request):
+    forms=BlogPostForm()
+    if request.method=='POST':
+        forms=BlogPostForm(data=request.POST,files=request.FILES)
+        if forms.is_valid():
+            blogpost=forms.save(commit=False)
+            blogpost.author=request.user
+            blogpost.save()
+            return redirect('/')
+    else:
+        forms=BlogPostForm()
+    return render(request,'codeapp/add_blogs.html',{'forms':forms})
 
 # User authentication
 def register_page(request):

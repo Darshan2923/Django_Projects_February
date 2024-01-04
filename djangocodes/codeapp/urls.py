@@ -2,8 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # blogs
     path('',views.index,name='index'),
-
+    path('add_blogs/',views.add_blogs,name='add_blogs'),
 
 # User authentication
     path('login/',views.login_page,name='login_page'),
