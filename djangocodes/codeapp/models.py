@@ -9,6 +9,7 @@ class Profile(models.Model):
     image=models.ImageField(upload_to='profile_pics',blank=True,null=True)
     bio=models.TextField(blank=True,null=True)
     phone_no=models.CharField(max_length=20,blank=True,null=True)
+    tag=models.CharField(max_length=130)
     facebook=models.CharField(max_length=130)
     instagram=models.CharField(max_length=130)
     linkdein=models.CharField(max_length=130)

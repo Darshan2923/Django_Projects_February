@@ -36,6 +36,23 @@ def delete_blogs(request,slug):
         return redirect('/')
     return render(request,'codeapp/delete.html',{'posts':posts})
 
+def blogs_comments(request, slug):
+    # Fetch the BlogPost object based on the provided slug
+    post = BlogPost.objects.filter(slug=slug).first()
+    # Fetch all comments associated with the retrieved blog post
+    comments = Comment.objects.filter(blog=post)
+    # Check if the incoming request method is POST
+    if request.method == 'POST':
+        # If it is a POST request, extract the user and comment content from the form
+        user = request.user
+        content = request.POST.get('content', '')
+        # Create a new Comment object with the extracted user, content, and associated blog post
+        comment = Comment(user=user, content=content, blog=post)   
+        # Save the new comment to the database
+        comment.save()
+    # Render the 'blog_comments.html' template with the comments and the retrieved blog post
+    return render(request, 'codeapp/blog_comments.html', {'comments': comments, 'post': post})
+
 
 # User authentication
 def register_page(request):
