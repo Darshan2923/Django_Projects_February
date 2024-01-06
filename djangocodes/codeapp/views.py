@@ -16,17 +16,26 @@ def index(request):
 
 @login_required(login_url='/login')
 def add_blogs(request):
-    forms=BlogPostForm()
+    form=BlogPostForm()
     if request.method=='POST':
-        forms=BlogPostForm(data=request.POST,files=request.FILES)
-        if forms.is_valid():
-            blogpost=forms.save(commit=False)
-            blogpost.author=request.user
+        form = BlogPostForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            blogpost = form.save(commit=False)
+            blogpost.author = request.user
             blogpost.save()
             return redirect('/')
-    else:
-        forms=BlogPostForm()
-    return render(request,'codeapp/add_blogs.html',{'forms':forms})
+        else:
+            form=BlogPostForm()
+    return render(request,'codeapp/add_blogs.html',{'form':form})
+
+@login_required(login_url='/login')
+def delete_blogs(request,slug):
+    posts=BlogPost.objects.get(slug=slug)
+    if request.method=='POST':
+        posts.delete()
+        return redirect('/')
+    return render(request,'codeapp/delete.html',{'posts':posts})
+
 
 # User authentication
 def register_page(request):

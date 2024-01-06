@@ -1,5 +1,7 @@
 {% extends 'codeapp/base.html' %}
-
+{% block title %}
+Login
+{% endblock title %}
 {% block content %}
 <form action="/login/" method="POST">
     {% csrf_token %}

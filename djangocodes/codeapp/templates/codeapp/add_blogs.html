@@ -1,4 +1,7 @@
 {% extends 'codeapp/base.html' %}
+{% block title %}
+Add Blogs
+{% endblock title %}
 {% block content %}
 <form action="/add_blogs/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
     <div class="container mt-4">
