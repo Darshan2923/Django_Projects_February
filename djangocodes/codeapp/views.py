@@ -54,6 +54,11 @@ def blogs_comments(request, slug):
     return render(request, 'codeapp/blog_comments.html', {'comments': comments, 'post': post})
 
 
+# Profile pages
+def profile_page(request):
+    return render(request,'profile_page.html')
+
+
 # User authentication
 def register_page(request):
     if request.method=="POST":   
