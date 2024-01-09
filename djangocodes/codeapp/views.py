@@ -58,6 +58,23 @@ def blogs_comments(request, slug):
 def profile_page(request):
     return render(request,'profile_page.html')
 
+def edit_profile(request):
+    form=None
+    try:
+        profile=request.user.profile
+        form=ProfileForm()
+    except:
+        profile=Profile(user=request.user)
+    if request.method=='POST':
+        form=ProfileForm(data=request.POST,files=request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            alert=True
+            return render(request,'codeapp/edit_profile.html',{'alert':alert})
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'codeapp/edit_profile.html', {'form': form})
+
 
 # User authentication
 def register_page(request):
