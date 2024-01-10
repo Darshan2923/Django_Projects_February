@@ -56,7 +56,7 @@ def blogs_comments(request, slug):
 
 # Profile pages
 def profile_page(request):
-    return render(request,'profile_page.html')
+    return render(request,'codeapp/profile_page.html')
 
 def edit_profile(request):
     form=None

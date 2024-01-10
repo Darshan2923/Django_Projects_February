@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -7,6 +8,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>DjangoCodes - {% block title %}{% endblock title %}</title>
 </head>
+
+<style>
+    .search-hover {
+        border: 1px solid #ccc;
+        outline: none;
+        background-size: 22px;
+        background-position: 13px;
+        border-radius: 10px;
+        width: 50px;
+        height: 50px;
+        padding: 25px;
+        transition: all 0.5s;
+    }
+
+    .search-hover:hover {
+        width: 300px;
+        padding-left: 50px;
+    }
+</style>
 
 <body>
     <div class="navbar navbar-inverse">
@@ -18,35 +38,27 @@
                         <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span
                                 class="icon-bar"></span><span class="icon-bar"></span><span
                                 class="icon-bar"></span></button>
-                        <a href="#" class="navbar-brand">GROUP.COM</a>
+                        <a href="{% url 'index' %}" class="navbar-brand d-flex"><img
+                                src="{% static 'codeapp/images/nav_logo.jpg' %}" width="30px" height="20px" alt="">
+                            DJANGOCODES</a>
                     </div>
 
                     <div class="navbar-collapse collapse" id="mobile_menu">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us <span
-                                        class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">About One</a></li>
-                                    <li><a href="#">About Two</a></li>
-                                    <li><a href="#">About Three</a></li>
-                                    <li><a href="#">About Four</a></li>
-                                    <li><a href="#">About Five</a></li>
-                                    <li><a href="#">About Six</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Welcome</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">About </a></li>
+                            <li><a href="#">Python</a></li>
+                            <li><a href="#">Django</a></li>
+                            <li><a href="#">Web Designing</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li>
                                 <form action="" class="navbar-form">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="search" name="search" id=""
-                                                placeholder="Search Anything Here..." class="form-control">
+                                            <input type="search" name="search" id="" placeholder="Search Here..."
+                                                class=" search-hover">
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-search"></span></span>
                                         </div>
@@ -56,13 +68,13 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+
                             <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                        class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span
-                                        class="caret"></span></a>
+                                        class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Login</a></li>
-                                    <li><a href="#">Sign Up</a></li>
+                                    <li><a href="{% url 'profile_page' %}">Profile</a></li>
+                                    <li><a href="{% url 'login_page' %}">Login</a></li>
+                                    <li><a href="{% url 'register_page' %}">Sign Up</a></li>
                                 </ul>
                             </li>
                         </ul>
