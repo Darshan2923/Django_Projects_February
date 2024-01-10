@@ -1,0 +1,11 @@
+-I used slug as charfield in previous blog project,
+But now, i wanted to automatically generate slug and not 
+make manually write it so i added.
+models.SlugField(unique=True)
+
+    def save(self):
+        self.slug = slugify(self.title)
+        super(BlogPost, self).save()
+    class   Meta:
+        ordering    =   ('-datetime')
+
