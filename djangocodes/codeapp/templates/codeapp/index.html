@@ -9,9 +9,9 @@ Hello Developers, Welcome to DjangoCodes
 
 <div class="post_container">
     <h1>Latest Posts</h1>
-    {% if posts %}
-    {% for post in posts %}
-    <a href="{% url 'blogs_comments' slug='{{slug}}' %}"></a>
+    {% if blog_posts %}
+    {% for post in blog_posts %}
+    <a href="{% url 'blogs_comments' slug={{slug}} %}"></a>
     <li>
         <h2>{{ post.title }}</h2>
         <p>Author: {{ post.author.username }}</p>
