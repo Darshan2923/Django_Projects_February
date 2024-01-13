@@ -9,18 +9,21 @@ Hello Developers, Welcome to DjangoCodes
 
 <div class="post_container">
     <h1>Latest Posts</h1>
-    <a href="{% url 'index' %}">
-        <div class="post_content">
-            <div class="card text-white bg-secondary mb-3 rounded relative" style="width: 20rem;">
-                <img src="{% static 'codeapp/images/blog_layout.png' %}" class="card-img-top rounded absolute top-3"
-                    style=" width: 18rem; margin:0 auto;" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                </div>
-            </div>
-        </div>
+    {% if posts %}
+    {% for post in posts %}
+    <a href="{% url 'blogs_comments' slug='{{slug}}' %}"></a>
+    <li>
+        <h2>{{ post.title }}</h2>
+        <p>Author: {{ post.author.username }}</p>
+        <p>Tag: {{ post.tag }}</p>
+        <p>{{ post.content }}</p>
+        <!-- You can add more fields as needed -->
+    </li>
     </a>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No blog posts available.</p>
+    {% endif %}
 </div>
 {% endblock content %}

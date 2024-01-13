@@ -10,7 +10,6 @@ class Profile(models.Model):
     image=models.ImageField(upload_to='profile_pics',blank=True,null=True)
     bio=models.TextField(blank=True,null=True)
     phone_no=models.CharField(max_length=20,blank=True,null=True)
-    tag=models.CharField(max_length=130,default='General')
     facebook=models.CharField(max_length=130)
     instagram=models.CharField(max_length=130)
     linkedin=models.CharField(max_length=130)
@@ -22,6 +21,7 @@ class Profile(models.Model):
 class BlogPost(models.Model):
     title=models.CharField(max_length=200)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
+    tag=models.CharField(max_length=130,default='General')
     content=models.TextField()
     slug=models.SlugField(unique=True)
     image=models.ImageField(upload_to='profile_pics',blank=True,null=True)
