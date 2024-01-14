@@ -8,8 +8,17 @@ from .forms import *
 # Create your views here.
 
 # blogs
-def index(request):
-    return render(request,'codeapp/index.html')
+def index(request,tag=None):
+    if tag:
+        blog_posts=BlogPost.objects.filter(tag__iexact=tag)
+        print(f"Tag: {tag}, Query: {blog_posts.query}")
+        print(f"Number of Posts: {blog_posts.count()}")    
+    else:
+        blog_posts=BlogPost.objects.all()
+    print(f"Total Posts: {blog_posts.count()}")
+    context={'blog_posts':blog_posts, 'tag': tag}
+    return render(request,'codeapp/index.html',context)
+
 
 @login_required(login_url='/login')
 def add_blogs(request):
@@ -49,16 +58,6 @@ def blogs_comments(request, slug):
         comment.save()
     # Render the 'blog_comments.html' template with the comments and the retrieved blog post
     return render(request, 'codeapp/blog_comments.html', {'comments': comments, 'post': post})
-
-def filteringPosts(request,tag=None):
-    if tag!='General':
-        blog_posts=BlogPost.objects.filter(tag=tag)
-    else:
-        blog_posts=BlogPost.objects.all()
-    context={'blog_posts':blog_posts}
-    return render(request,'codeapp/index.html',context)
-
-
 # Profile pages
 def profile_page(request):
     return render(request,'codeapp/profile_page.html')
@@ -79,6 +78,9 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'codeapp/edit_profile.html', {'form': form})
+
+def contact(request):
+    return render(request,'codeapp/index.html')
 
 
 # User authentication

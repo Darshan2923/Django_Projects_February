@@ -25,3 +25,22 @@ models.SlugField(unique=True)
         </div>
     </a> -->
 
+Added options to tags
+TAG_CHOICES=(
+    ("1","General"),
+    ("2","Python"),
+    ("3","Django"),
+    ("4","Web Designing")
+)
+
+    tag=models.CharField(
+        max_length=20,
+        choices=TAG_CHOICES,
+        default='General')
+
+
+Added auto slugging functionality in django admin
+by modyfying admin,models.py
+    
+
+

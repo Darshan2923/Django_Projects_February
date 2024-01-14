@@ -19,10 +19,10 @@ class Profile(models.Model):
     
 
 TAG_CHOICES=(
-    ("1","General"),
-    ("2","Python"),
-    ("3","Django"),
-    ("4","Web Designing")
+    ("1","general"),
+    ("2","python"),
+    ("3","django"),
+    ("4","web designing")
 )
 class BlogPost(models.Model):
     title=models.CharField(max_length=200)
@@ -30,16 +30,17 @@ class BlogPost(models.Model):
     tag=models.CharField(
         max_length=20,
         choices=TAG_CHOICES,
-        default='General')
+        default='general')
     content=models.TextField()
     slug=models.SlugField(unique=True)
     image=models.ImageField(upload_to='profile_pics',blank=True,null=True)
     datetime=models.DateTimeField(auto_now_add=True)
     likes=models.IntegerField(default=0)
 
-    def save(self):
-        self.slug = slugify(self.title)
-        super(BlogPost, self).save()
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
     class   Meta:
         ordering    =   ['-datetime']
 

@@ -8,21 +8,21 @@ Hello Developers, Welcome to DjangoCodes
 < />
 
 <div class="post_container">
-    <h1>Latest Posts</h1>
+    <h1>Latest Posts (Tag: {{ tag}})</h1>
     {% if blog_posts %}
     {% for post in blog_posts %}
     <ul>
-        <a href="{% url 'blogs_comments' slug='{{slug}}' %}"></a>
         <li>
+            <a href="{% url 'blogs_comments' slug=post.slug %}"></a>
             <h2>{{ post.title }}</h2>
             <p>Author: {{ post.author.username }}</p>
-            <p>Tag: {{ post.tag }}</p>
+            <p>Tag: {{post.get_tag_display }}</p>
             <p>{{ post.content }}</p>
             <!-- You can add more fields as needed -->
+            </a>
         </li>
-        </a>
-        {% endfor %}
     </ul>
+    {% endfor %}
     {% else %}
     <p>No blog posts available.</p>
     {% endif %}
