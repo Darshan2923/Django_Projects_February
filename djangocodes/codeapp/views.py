@@ -9,10 +9,7 @@ from .forms import *
 
 # blogs
 def index(request):
-    posts = BlogPost.objects.all()
-    posts = BlogPost.objects.filter().order_by('-datetime')
-    context={'posts':posts}
-    return render(request,'codeapp/index.html',context)
+    return render(request,'codeapp/index.html')
 
 @login_required(login_url='/login')
 def add_blogs(request):
@@ -53,13 +50,13 @@ def blogs_comments(request, slug):
     # Render the 'blog_comments.html' template with the comments and the retrieved blog post
     return render(request, 'codeapp/blog_comments.html', {'comments': comments, 'post': post})
 
-# def filteringPosts(request,tag=None):
-#     if tag:
-#         blog_posts=BlogPost.objects.filter(tag=tag)
-#     else:
-#         blog_posts=BlogPost.objects.all()
-#     context={'blog_posts':blog_posts}
-#     return render(request,'codeapp/index.html',context)
+def filteringPosts(request,tag=None):
+    if tag!='General':
+        blog_posts=BlogPost.objects.filter(tag=tag)
+    else:
+        blog_posts=BlogPost.objects.all()
+    context={'blog_posts':blog_posts}
+    return render(request,'codeapp/index.html',context)
 
 
 # Profile pages
