@@ -28,9 +28,9 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="{% url 'index' %}">Home</a></li>
                             {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'add_blogs' %}">Add Blogs</a></li>
+                            <li><a href="{% url 'add_blogs' %}">Add Blogs </a></li>
                             {% endif %}
-                            <li><a href="{% url 'index_tagged' %}">Python</a></li>
+                            <li><a href="{% url 'index_tagged' tag='python' %}">Python</a></li>
                             <li><a href="{% url 'index_tagged' tag='django' %}">Django</a></li>
                             <li><a href="{% url 'index_tagged' tag='web designing' %}">Web Designing</a></li>
                             <li><a href="{% url 'contact' %}">Contact</a></li>
