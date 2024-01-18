@@ -5,19 +5,28 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from django.db.models import Q
+
 # Create your views here.
 
 # blogs
-def index(request,tag=None):
-    if tag:
-        blog_posts=BlogPost.objects.filter(tag__iexact=tag)
-        print(f"Tag: {tag}, Query: {blog_posts.query}")
-        print(f"Number of Posts: {blog_posts.count()}")    
-    else:
-        blog_posts=BlogPost.objects.all()
-    print(f"Total Posts: {blog_posts.count()}")
-    context={'blog_posts':blog_posts, 'tag': tag}
-    return render(request,'codeapp/index.html',context)
+# def index(request,tag=None):
+#     if tag:
+#         blog_posts=BlogPost.objects.filter(tag__iexact=tag)
+#         print(f"Tag: {tag}, Query: {blog_posts.query}")
+#         print(f"Number of Posts: {blog_posts.count()}")    
+#     else:
+#         blog_posts=BlogPost.objects.all()
+#     print(f"Total Posts: {blog_posts.count()}")
+#     context={'blog_posts':blog_posts, 'tag': tag}
+#     return render(request,'codeapp/index.html',context)
+
+def index(request, tag=None):
+    q = request.GET.get('q', '')  # Use the value of 'q' or an empty string if it's not present
+    blog_posts = BlogPost.objects.filter(Q(tag__iexact=tag) if tag else Q(), title__icontains=q)
+    context = {"blog_posts": blog_posts, "tag": tag}
+    return render(request, 'codeapp/index.html', context)
+
 
 
 @login_required(login_url='/login')
