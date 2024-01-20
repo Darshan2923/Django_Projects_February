@@ -8,17 +8,18 @@ from .forms import *
 # Create your views here.
 
 # blogs
-def index(request,tag=None):
-    if tag:
-        blog_posts=BlogPost.objects.filter(tag__iexact=tag)
-        print(f"Tag: {tag}, Query: {blog_posts.query}")
-        print(f"Number of Posts: {blog_posts.count()}")    
-    else:
-        blog_posts=BlogPost.objects.all()
+def index(request):
+    blog_posts=BlogPost.objects.all()
     print(f"Total Posts: {blog_posts.count()}")
-    context={'blog_posts':blog_posts, 'tag': tag}
+    context={'blog_posts':blog_posts}
     return render(request,'codeapp/index.html',context)
 
+def index_tagged(request,tag):
+    blog_posts=BlogPost.objects.filter(tag__iexact=tag)
+    print(f"Tag: {tag}, Query: {blog_posts.query}")
+    print(f"Number of Posts: {blog_posts.count()}")    
+    context={'blog_posts':blog_posts, 'tag': tag}
+    return render(request,'codeapp/index.html',context)
 
 @login_required(login_url='/login')
 def add_blogs(request):

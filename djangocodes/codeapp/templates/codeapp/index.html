@@ -8,7 +8,7 @@ Hello Developers, Welcome to DjangoCodes
 < />
 
 <div class="post_container">
-    <h1>Latest Posts</h1>
+    <h1>Latest Posts {% if tag %}(Tag: {{ tag }}){% endif %}</h1>
     {% if blog_posts %}
     {% for post in blog_posts %}
     <ul>
