@@ -16,7 +16,8 @@ Hello Developers, Welcome to DjangoCodes
             <a href="{% url 'blogs_comments' slug=post.slug %}"></a>
             <h2>{{ post.title }}</h2>
             <p>Author: {{ post.author.username }}</p>
-            <p>Tag: {{post.get_tag_display }}</p>
+            <p>Tag: {{post.tag }}</p>
+
             <p>{{ post.content }}</p>
             <!-- You can add more fields as needed -->
             </a>

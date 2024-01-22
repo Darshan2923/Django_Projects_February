@@ -18,19 +18,11 @@ class Profile(models.Model):
         return self.user
     
 
-TAG_CHOICES=(
-    ("1","general"),
-    ("2","python"),
-    ("3","django"),
-    ("4","web designing")
-)
+
 class BlogPost(models.Model):
     title=models.CharField(max_length=200)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
-    tag=models.CharField(
-        max_length=20,
-        choices=TAG_CHOICES,
-        default='general')
+    tag=models.TextField()
     content=models.TextField()
     slug=models.SlugField(unique=True)
     image=models.ImageField(upload_to='profile_pics',blank=True,null=True)
