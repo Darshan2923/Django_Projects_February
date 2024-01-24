@@ -5,9 +5,12 @@ class BlogPostForm(forms.ModelForm):
     TAG_CHOICES = [
     ('Python', 'Python'),
     ('Django', 'Django'),
+    ('Web Designing','Web Designing'),
     ('General', 'General'),
     # Add more choices as needed
 ]
+
+    # Use a CharField with choices for the 'tag' field
     tag = forms.CharField(widget=forms.Select(choices=TAG_CHOICES, attrs={'class': 'form-control'}))
 
     class Meta:
